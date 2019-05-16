@@ -1,0 +1,45 @@
+{
+    "name": "epa.crm.webresources.tests",
+    "version": "1.0.0",
+    "description": "Unit tests for Dynamics 365 Client API",
+    "main": "index.js",
+    "directories": {
+      "src":"src",
+      "test": "test"
+    },
+    "dependencies": {
+      "xrm-mock": "^3.4.10"
+    },
+    "devDependencies": {
+      "@types/jest": "^22.2.3",
+      "@types/node": "8.10.12",
+      "@types/sinon": "^5.0.1",
+      "@types/xrm": "8.2.10",
+      "@types/jquery": "3.3.29",
+      "jest": "^22.4.4",
+      "sinon": "^5.1.1",
+      "ts-jest": "^22.4.6",
+      "tslint": "^5.10.0",
+      "typescript": "^2.8.3"
+    },
+    "scripts": {
+      "build": "tsc",
+      "test": "jest"
+    },
+    "author": "EPA",
+    "license": "MIT",
+    "jest": {
+      "moduleFileExtensions": [
+        "ts",
+        "js"
+      ],
+      "transform": {
+        "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      },
+      "testURL": "http://localhost/",
+      "testMatch": [
+        "**/test/**/*.+(ts|js)"
+      ],
+      "setupFiles": ["./setup/setup-jest.js"]
+    }
+  }
