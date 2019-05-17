@@ -1,6 +1,7 @@
-import * as Site from "../src/epa_site"
+import * as Site from "../src/dv_site"
 
 import { XrmMockGenerator } from "xrm-mock";
+import { XrmFakedContext } from "fakexrmeasy";
 
 describe("Site", () => {
   beforeEach(() => {
