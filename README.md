@@ -14,7 +14,7 @@ Installing & Building & Running tests
 
 The repo is already preconfigured to use jest for testing. You should be able to run them via npm run test after installing packages and building the project.
 
-It is also ver handy to use these VS Code extensions to have live unit tests running as well as a test explorer UI.
+It is also very handy to use these VS Code extensions to have live unit tests running as well as a test explorer UI.
 
 - Jest: Open up VS Code, go search for the extension "Jest".
 - Test Explorer UI: In VS Code, search "Test Explorer UI" and then install it.
