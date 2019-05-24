@@ -13,16 +13,20 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
+    "@types/jquery": "3.3.29",
     "@types/node": "8.10.12",
     "@types/xrm": "8.2.10",
-    "@types/jquery": "3.3.29",
     "jest": "^22.4.4",
     "ts-jest": "^22.4.6",
     "tslint": "^5.10.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "webpack": "4.32.2",
+    "webpack-cli": "^3.3.2",
+    "awesome-typescript-loader": "5.2.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc -p tsconfig.browser.json",
+    "build-webpack": "webpack -d",
     "test": "jest"
   },
   "author": "Jordi Montana",

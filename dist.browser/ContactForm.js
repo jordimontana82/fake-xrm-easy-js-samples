@@ -1,13 +1,11 @@
+"use strict";
 /// <reference path ="../node_modules/@types/jquery/index.d.ts"/> 
-
+Object.defineProperty(exports, "__esModule", { value: true });
 //var WebApiClient = require('../src/new_WebApiClient.ts');
-
-export class ContactForm {
-
-    public static onLoad() {
-        alert('onloadcontactform');
+var ContactForm = /** @class */ (function () {
+    function ContactForm() {
     }
-    public static hasSomeProperty(callback: (result: boolean) => void) {
+    ContactForm.hasSomeProperty = function (callback) {
         /*
         WebApiClient.retrieveMultiple("contacts?$select=name,revenue", function (data) {
             var results = data.value;
@@ -17,17 +15,16 @@ export class ContactForm {
         });
 
         */
-
-       alert('hasSomeProperty');
-       callback(true);
-    }
-    public static hideTabs(callback: () => void) {
+        alert('hasSomeProperty');
+        callback(true);
+    };
+    ContactForm.hideTabs = function (callback) {
         var contactid = Xrm.Page.data.entity.getId();
-
         ContactForm.hasSomeProperty(function (result) {
             Xrm.Page.ui.tabs.get('OtherDetails').setVisible(result);
             callback();
         });
-    }
-    
-}
+    };
+    return ContactForm;
+}());
+exports.ContactForm = ContactForm;

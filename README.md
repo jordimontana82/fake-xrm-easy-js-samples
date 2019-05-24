@@ -21,3 +21,10 @@ It is also very handy to use these VS Code extensions to have live unit tests ru
 - Jest Test Explorer: In VS Code, search for "Jest Test Explorer" and install it.
 
 
+Samples for PCF (Coming soon)
+======================================
+
+https://docs.microsoft.com/en-us/powerapps/developer/component-framework/overview
+
+
+

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "outDir": "./dist.browser",
+      "target": "es5",
+      "module": "es2015",
+      "moduleResolution": "node",
+      "lib": ["scripthost", "dom", "es5"]
+    },
+    "exclude": [
+        "node_modules",
+        "wwwroot",
+        "test"
+    ],
+    "include": [
+      "./src/**/*"
+    ]
+  }
