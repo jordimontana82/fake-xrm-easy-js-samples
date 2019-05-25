@@ -1,17 +1,19 @@
 import { ContactForm } from "../src/ContactForm"
-import { XrmFakedContext } from "fakexrmeasy";
+import { XrmFakedContext, Entity } from "fakexrmeasy";
 import { XrmMockGenerator, XrmStaticMock, LookupAttributeMock, LookupValueMock } from "xrm-mock";
 
 var WebApiClient = require('../src/new_WebApiClient.ts');
 var fakeUrl: string = 'http://fakeUrl';
+var Guid = require('guid');
 
 describe("Contact", () => {
   let context: XrmFakedContext = null;
+  let accountId = Guid.create();
 
   beforeEach(() => {
     XrmMockGenerator.initialise({});
     XrmMockGenerator.Attribute.createString("firstname", "Joe");
-    XrmMockGenerator.Attribute.createLookup("parentcustomerid", new LookupValueMock("5555", "account"))
+    XrmMockGenerator.Attribute.createLookup("parentcustomerid", new LookupValueMock(accountId.toString(), "account"))
     XrmMockGenerator.Tab.createTab("Details", "Contact Details", true);
     XrmMockGenerator.Tab.createTab("OtherDetails", "Other Details", false);
     
@@ -26,11 +28,15 @@ describe("Contact", () => {
     expect(name).toBe("Joe"); // Pass
   });
 
-  it("should set OtherDetails tab to visible", done => {
-    ContactForm.onLoad(XrmMockGenerator.getEventContext());
+  it("should set tab visible based on company type", done => {
+    context.initialize([
+      new Entity("account", accountId, {name: 'Dynamics Value SL'}),
+    ]);
 
-    let otherTab = Xrm.Page.ui.tabs.get('OtherDetails');
-    ContactForm.hideTabs(function() {
+    var formContext = XrmMockGenerator.getFormContext();
+    let otherTab = formContext.ui.tabs.get('OtherDetails');
+
+    ContactForm.showHideTabsBasedOnCompany(formContext, function(success) {
       expect(otherTab.getVisible()).toBe(true); 
       done();
     });
