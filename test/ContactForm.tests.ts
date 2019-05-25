@@ -12,9 +12,7 @@ describe("Contact", () => {
 
   beforeEach(() => {
     XrmMockGenerator.initialise({});
-    XrmMockGenerator.Attribute.createString("firstname", "Joe");
     XrmMockGenerator.Attribute.createLookup("parentcustomerid", new LookupValueMock("{" + accountId.toString() + "}", "account"))
-    XrmMockGenerator.Tab.createTab("Details", "Contact Details", true);
     XrmMockGenerator.Tab.createTab("tab_bigcompany", "Datos contacto Gran Empresa", false);
     XrmMockGenerator.Tab.createTab("tab_smallcompany", "Datos contacto Pequeña Empresa", false);
 
@@ -22,11 +20,6 @@ describe("Contact", () => {
         return fakeUrl;
     };
     context = new XrmFakedContext("v9.0",fakeUrl, true);
-  });
-
-  it("should initially be called Joe", () => {
-    let name = Xrm.Page.getAttribute("firstname").getValue();
-    expect(name).toBe("Joe"); // Pass
   });
 
   it("should set Small company details tab to visible if contact belongs to a small company", done => {
