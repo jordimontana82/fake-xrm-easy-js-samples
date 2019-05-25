@@ -19,18 +19,15 @@ export class ContactForm {
         var cleanAccountId = accountId.replace("{", "").replace("}", "");
 
         WebApiClient.retrieveMultiple("accounts(" + cleanAccountId + ")?$select=dv_isbigcompany", function (data) {
-            var results = data.value;
+            var accountDetails = data;
 
-            if(results.length && results.length > 0) {
-                var accountDetails = results[0];
-                if(accountDetails.dv_isbigcompany) {
-                    formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
-                }
-                else {
-                    formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
-                }
-                
+            if(accountDetails.dv_isbigcompany) {
+                formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
             }
+            else {
+                formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
+            }
+            
             callback(true);
         });
     }

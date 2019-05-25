@@ -12,7 +12,8 @@ var ContactForm = /** @class */ (function () {
     };
     ContactForm.showHideTabsBasedOnCompany = function (formContext, callback) {
         var accountId = formContext.getAttribute("parentcustomerid").getValue()[0].id;
-        WebApiClient.retrieveMultiple("accounts(" + accountId + ")?$select=dv_isbigcompany", function (data) {
+        var cleanAccountId = accountId.replace("{", "").replace("}", "");
+        WebApiClient.retrieveMultiple("accounts(" + cleanAccountId + ")?$select=dv_isbigcompany", function (data) {
             var results = data.value;
             if (results.length && results.length > 0) {
                 var accountDetails = results[0];
