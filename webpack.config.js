@@ -9,7 +9,7 @@ var configs = [
         entry: APP_DIR + '/index.ts',
         output: {
             path: BUILD_DIR,
-            filename: 'ContactForm.js'
+            filename: 'index.js'
         },
         module: {
             rules: [

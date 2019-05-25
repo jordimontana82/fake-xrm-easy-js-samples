@@ -14,15 +14,12 @@ var ContactForm = /** @class */ (function () {
         var accountId = formContext.getAttribute("parentcustomerid").getValue()[0].id;
         var cleanAccountId = accountId.replace("{", "").replace("}", "");
         WebApiClient.retrieveMultiple("accounts(" + cleanAccountId + ")?$select=dv_isbigcompany", function (data) {
-            var results = data.value;
-            if (results.length && results.length > 0) {
-                var accountDetails = results[0];
-                if (accountDetails.dv_isbigcompany) {
-                    formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
-                }
-                else {
-                    formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
-                }
+            var accountDetails = data;
+            if (accountDetails.dv_isbigcompany) {
+                formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
+            }
+            else {
+                formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
             }
             callback(true);
         });
