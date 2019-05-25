@@ -5,6 +5,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ContactForm = /** @class */ (function () {
     function ContactForm() {
     }
+    ContactForm.onLoad = function (context) {
+        alert('onloadcontactform');
+    };
     ContactForm.hasSomeProperty = function (callback) {
         /*
         WebApiClient.retrieveMultiple("contacts?$select=name,revenue", function (data) {

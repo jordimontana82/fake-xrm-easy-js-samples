@@ -4,8 +4,10 @@
 
 export class ContactForm {
 
-    public static onLoad() {
-        alert('onloadcontactform');
+    public static onLoad(executionContext: any) {
+        var accountId = executionContext.getFormContext().getAttribute("parentcustomerid").getValue()[0].id;
+
+        
     }
     public static hasSomeProperty(callback: (result: boolean) => void) {
         /*

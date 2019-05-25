@@ -1,6 +1,6 @@
 import { ContactForm } from "../src/ContactForm"
 import { XrmFakedContext } from "fakexrmeasy";
-import { XrmMockGenerator, XrmStaticMock } from "xrm-mock";
+import { XrmMockGenerator, XrmStaticMock, LookupAttributeMock, LookupValueMock } from "xrm-mock";
 
 var WebApiClient = require('../src/new_WebApiClient.ts');
 var fakeUrl: string = 'http://fakeUrl';
@@ -11,6 +11,7 @@ describe("Contact", () => {
   beforeEach(() => {
     XrmMockGenerator.initialise({});
     XrmMockGenerator.Attribute.createString("firstname", "Joe");
+    XrmMockGenerator.Attribute.createLookup("parentcustomerid", new LookupValueMock("5555", "account"))
     XrmMockGenerator.Tab.createTab("Details", "Contact Details", true);
     XrmMockGenerator.Tab.createTab("OtherDetails", "Other Details", false);
     
@@ -26,6 +27,8 @@ describe("Contact", () => {
   });
 
   it("should set OtherDetails tab to visible", done => {
+    ContactForm.onLoad(XrmMockGenerator.getEventContext());
+
     let otherTab = Xrm.Page.ui.tabs.get('OtherDetails');
     ContactForm.hideTabs(function() {
       expect(otherTab.getVisible()).toBe(true); 
