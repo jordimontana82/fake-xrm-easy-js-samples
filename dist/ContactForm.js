@@ -1,31 +1,29 @@
 "use strict";
 /// <reference path ="../node_modules/@types/jquery/index.d.ts"/> 
 Object.defineProperty(exports, "__esModule", { value: true });
-//var WebApiClient = require('../src/new_WebApiClient.ts');
+var WebApiClient = require('../src/new_WebApiClient.ts');
 var ContactForm = /** @class */ (function () {
     function ContactForm() {
     }
-    ContactForm.onLoad = function (context) {
-        alert('onloadcontactform');
-    };
-    ContactForm.hasSomeProperty = function (callback) {
-        /*
-        WebApiClient.retrieveMultiple("contacts?$select=name,revenue", function (data) {
-            var results = data.value;
-
-            callback(results.length > 0);
-
+    ContactForm.onLoad = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        this.showHideTabsBasedOnCompany(formContext, function () {
         });
-
-        */
-        alert('hasSomeProperty');
-        callback(true);
     };
-    ContactForm.hideTabs = function (callback) {
-        var contactid = Xrm.Page.data.entity.getId();
-        ContactForm.hasSomeProperty(function (result) {
-            Xrm.Page.ui.tabs.get('OtherDetails').setVisible(result);
-            callback();
+    ContactForm.showHideTabsBasedOnCompany = function (formContext, callback) {
+        var accountId = formContext.getAttribute("parentcustomerid").getValue()[0].id;
+        WebApiClient.retrieveMultiple("accounts(" + accountId + ")?$select=dv_isbigcompany", function (data) {
+            var results = data.value;
+            if (results.length && results.length > 0) {
+                var accountDetails = results[0];
+                if (accountDetails.dv_isbigcompany) {
+                    formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
+                }
+                else {
+                    formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
+                }
+            }
+            callback(true);
         });
     };
     return ContactForm;

@@ -16,13 +16,18 @@ export class ContactForm {
     public static showHideTabsBasedOnCompany(formContext, callback: (success: boolean) => void) {
         var accountId = formContext.getAttribute("parentcustomerid").getValue()[0].id;
 
-        WebApiClient.retrieveMultiple("accounts(" + accountId + ")?$select=name", function (data) {
+        var cleanAccountId = accountId.replace("{", "").replace("}", "");
+
+        WebApiClient.retrieveMultiple("accounts(" + cleanAccountId + ")?$select=dv_isbigcompany", function (data) {
             var results = data.value;
 
             if(results.length && results.length > 0) {
                 var accountDetails = results[0];
-                if(accountDetails) {
-                    formContext.ui.tabs.get('OtherDetails').setVisible(true);
+                if(accountDetails.dv_isbigcompany) {
+                    formContext.ui.tabs.get('tab_bigcompany').setVisible(true);
+                }
+                else {
+                    formContext.ui.tabs.get('tab_smallcompany').setVisible(true);
                 }
                 
             }
