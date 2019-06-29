@@ -30,7 +30,7 @@ describe("Contact", () => {
     var formContext = XrmMockGenerator.getFormContext();
 
     ContactForm.showHideTabsBasedOnCompany(formContext, function(success) {
-      var tab = Xrm.Page.ui.tabs.get("tab_smallcompany");
+      var tab = formContext.ui.tabs.get("tab_smallcompany");
       expect(tab.getVisible()).toBe(true); 
       done();
     });
@@ -44,11 +44,9 @@ describe("Contact", () => {
     var formContext = XrmMockGenerator.getFormContext();
 
     ContactForm.showHideTabsBasedOnCompany(formContext, function(success) {
-      var tab = Xrm.Page.ui.tabs.get("tab_bigcompany");
+      var tab = formContext.ui.tabs.get("tab_bigcompany");
       expect(tab.getVisible()).toBe(true); 
       done();
     });
   });
-
-
 });
