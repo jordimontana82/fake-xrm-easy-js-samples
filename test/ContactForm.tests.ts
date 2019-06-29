@@ -13,8 +13,8 @@ describe("Contact", () => {
   beforeEach(() => {
     XrmMockGenerator.initialise({});
     XrmMockGenerator.Attribute.createLookup("parentcustomerid", new LookupValueMock("{" + accountId.toString() + "}", "account"))
-    XrmMockGenerator.Tab.createTab("tab_bigcompany", "Datos contacto Gran Empresa", false);
-    XrmMockGenerator.Tab.createTab("tab_smallcompany", "Datos contacto Pequeña Empresa", false);
+    XrmMockGenerator.Tab.createTab("tab_bigcompany", "Big Company Account Details", false);
+    XrmMockGenerator.Tab.createTab("tab_smallcompany", "Small Company Account Details", false);
 
     Xrm.Page.context.getClientUrl = function() {
         return fakeUrl;
